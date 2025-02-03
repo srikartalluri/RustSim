@@ -4,8 +4,18 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-rayon = "1.7"  # For parallelization
+# Parallel computing
+rayon = "1.7"  
+
+# SIMD optimizations
+nalgebra = "0.32"  # For vector/matrix math
+stdsimd = { version = "0.1", optional = true }  # SIMD support
+
+# Python bindings
 pyo3 = { version = "0.20", features = ["extension-module"] }
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib"]  # Required for PyO3 to work
+
+[features]
+default = ["stdsimd"]
